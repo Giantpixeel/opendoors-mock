@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open Doors Mock Exam 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f5f1; --surface:#fff; --soft:#f0efe9; --ink:#1c1c1a; --muted:#5f5e58; --line:#dfddd5;
+  --accent:#1d4ed8; --accent-soft:#e3ebfd; --ok:#1f7a2e; --ok-soft:#e4f3e6; --bad:#b3261e; --bad-soft:#fbeceb;
+  --warn:#9a5b00; --warn-soft:#fff3dc; --pink:#b0124f; --pink-soft:#fbe7ef; --shadow:0 1px 2px rgba(0,0,0,.05),0 4px 14px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141413; --surface:#1e1e1c; --soft:#262624; --ink:#ecebe6; --muted:#a6a49c; --line:#353430;
+  --accent:#7aa2ff; --accent-soft:#1a2747; --ok:#7fca86; --ok-soft:#1b2e1d; --bad:#f19a92; --bad-soft:#3a1d1b;
+  --warn:#ffbe5c; --warn-soft:#33270f; --pink:#f278a6; --pink-soft:#3a1d29; --shadow:none; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141413; --surface:#1e1e1c; --soft:#262624; --ink:#ecebe6; --muted:#a6a49c; --line:#353430;
+  --accent:#7aa2ff; --accent-soft:#1a2747; --ok:#7fca86; --ok-soft:#1b2e1d; --bad:#f19a92; --bad-soft:#3a1d1b;
+  --warn:#ffbe5c; --warn-soft:#33270f; --pink:#f278a6; --pink-soft:#3a1d29; --shadow:none; color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,"Segoe UI",Arial,sans-serif;font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+.wrap{max-width:900px;margin:0 auto;padding-block:0 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.modal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:16px}
+.modal .box{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:18px;max-width:420px;width:100%;box-shadow:0 10px 40px rgba(0,0,0,.25)}
+.modal .row{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:14px}
+.notice{background:var(--warn-soft);color:var(--ink);border-radius:10px;padding:10px 14px;margin:10px 0;font-weight:600}
+.ar{direction:rtl;text-align:right;font-family:"IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif}
+.brand{border:2px solid var(--accent);background:linear-gradient(180deg,var(--accent-soft),var(--surface) 70%)}
+.brand-row{display:flex;gap:14px;align-items:center}
+.brand-mark{flex:0 0 auto;width:54px;height:54px;border-radius:14px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.25rem;letter-spacing:.04em;font-family:"JetBrains Mono",monospace}
+.brand-name{font-weight:700;font-size:1.15rem;line-height:1.3}
+.brand-tag{display:inline-block;margin-top:2px;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.contact{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.contact .phone{font-family:"JetBrains Mono",monospace;font-weight:600;font-size:1.02rem;user-select:all;direction:ltr;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+.btn.wa{background:#1f8f4e;border-color:#1f8f4e;color:#fff;text-decoration:none}
+.disclaimer{font-size:.82rem;color:var(--muted);margin-top:10px}
+.brandfoot{max-width:900px;margin:0 auto;padding-block:18px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));border-top:1px solid var(--line);font-size:.85rem;color:var(--muted);display:flex;gap:8px 16px;flex-wrap:wrap;align-items:center}
+.brandfoot b{color:var(--ink)}
+.cta h3{margin:.1em 0 .4em}
+h1{font-size:1.7rem;margin:.4em 0 .2em}
+h2{font-size:1.25rem;margin:2em 0 .6em;padding-bottom:.3em;border-bottom:2px solid var(--line)}
+code,pre,.mono{font-family:"JetBrains Mono",Consolas,monospace}
+code{background:var(--soft);padding:0 5px;border-radius:4px;font-size:.88em}
+pre{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto;font-size:.86rem;line-height:1.55;margin:.5em 0}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:.5em 0}
+th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:var(--soft)}
+.tw{overflow-x:auto}
+.btn{font:inherit;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:8px 16px;cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.danger{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn:disabled{opacity:.5;cursor:default}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow);margin:14px 0}
+.muted{color:var(--muted)}
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 0;margin-bottom:6px}
+.bar .in{max-width:900px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.bar .ttl{font-weight:700;flex:1;min-width:140px}
+.timer{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:1.1rem;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:4px 10px}
+.timer.low{color:var(--bad);border-color:var(--bad)}
+.prog{font-size:.85rem;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:4px;margin:10px 0}
+.nav a{display:inline-flex;align-items:center;justify-content:center;width:34px;height:30px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;font-size:.8rem;font-weight:600}
+.nav a.done{background:var(--accent-soft);border-color:var(--accent)}
+.nav a.ok{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.nav a.bad{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.nav a.self{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
+/* task */
+.task{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin:14px 0;box-shadow:var(--shadow);scroll-margin-top:80px}
+.th{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px 14px;border-bottom:1px solid var(--line);background:var(--soft);border-radius:12px 12px 0 0}
+.th .n{font-weight:700}
+.lv{font-size:.72rem;font-weight:700;padding:1px 9px;border-radius:99px}
+.lv.basic{background:var(--accent-soft);color:var(--accent)}
+.lv.inter{background:var(--warn-soft);color:var(--warn)}
+.lv.adv{background:var(--pink-soft);color:var(--pink)}
+.lv.oral{background:var(--ok-soft);color:var(--ok)}
+.fld{font-size:.8rem;color:var(--muted)}
+.res{margin-left:auto;font-weight:700;font-size:.85rem}
+.res.ok{color:var(--ok)} .res.bad{color:var(--bad)} .res.self{color:var(--warn)}
+.tb{padding:12px 14px}
+.q{margin:.2em 0 .6em}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:6px 10px;border:1px solid transparent;border-radius:8px;cursor:pointer}
+.opt:hover{background:var(--soft)}
+.opt input{margin-top:4px;accent-color:var(--accent);width:17px;height:17px;flex:0 0 auto}
+.opt.correct{background:var(--ok-soft);border-color:var(--ok)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+input.ans{font:inherit;font-family:"JetBrains Mono",monospace;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);width:260px;max-width:100%}
+textarea{font:inherit;font-size:.92rem;width:100%;min-height:180px;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);resize:vertical}
+.hint{font-size:.82rem;color:var(--muted)}
+/* review */
+.why{direction:rtl;text-align:right;font-family:"IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif;background:var(--ok-soft);border-radius:8px;padding:10px 14px;margin-top:10px;line-height:1.85}
+.why b.t{display:block;color:var(--ok);margin-bottom:2px}
+.why .ltr,.why code{direction:ltr;unicode-bidi:isolate}
+.cmp{font-size:.9rem;margin-top:8px}
+.cmp span{display:inline-block;margin-right:14px}
+.model{background:var(--accent-soft);border-radius:8px;padding:10px 14px;margin-top:10px}
+.model h4{margin:.2em 0 .4em}
+.rub label{display:flex;gap:8px;align-items:flex-start;padding:4px 0;cursor:pointer}
+.rub input{margin-top:5px;accent-color:var(--ok)}
+.summary{border:2px solid var(--accent)}
+.big{font-size:2.2rem;font-weight:700;line-height:1.1}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media (max-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+.tile{background:var(--soft);border-radius:10px;padding:10px;text-align:center}
+.tile b{display:block;font-size:1.3rem}
+.hide{display:none!important}
+.oralpick{display:flex;gap:8px;align-items:center;font-weight:600;margin:6px 0}
+svg text{fill:var(--ink)}
+pre,code,.mono,input.ans,textarea{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
+</style>
+</head>
+<body>
+<div class="bar hide" id="bar"><div class="in">
+  <span class="ttl" id="barTitle"></span>
+  <span class="prog" id="prog"></span>
+  <span class="timer" id="timer">3:00:00</span>
+  <button class="btn primary" id="submitBtn" type="button">Submit exam</button>
+  <button class="btn" id="themeBtn" type="button" title="Theme">☾</button>
+</div></div>
+
+<div class="wrap">
+  <!-- START SCREEN -->
+  <div id="start">
+    <h1 id="title"></h1>
+    <p class="muted" id="subtitle"></p>
+    <div class="card brand">
+      <div class="brand-row">
+        <div class="brand-mark" aria-hidden="true">AI</div>
+        <div style="min-width:0">
+          <div class="brand-name">Eng. Ahmad Mohammad Zeina</div>
+          <div class="brand-name ar" style="text-align:left">المهندس أحمد محمد زينة</div>
+          <span class="brand-tag">Professional AI courses</span>
+        </div>
+      </div>
+      <p class="ar" style="margin:12px 0 0">هالاختبار التجريبي <b>مجاني</b> ومن إعداد <b>المهندس أحمد محمد زينة</b>. وإذا بدك تتعلّم <b>الذكاء الاصطناعي وتعلّم الآلة بشكل احترافي</b>، تواصل معي عالواتساب.</p>
+      <div class="contact">
+        <a class="btn wa" href="https://wa.me/963988466650" target="_blank" rel="noopener">WhatsApp</a>
+        <span class="phone">+963 988 466 650</span>
+        <button class="btn" type="button" data-copy="+963988466650">Copy number</button>
+        <a class="btn" href="https://github.com/Giantpixeel" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <p class="disclaimer">Unofficial practice test. Not affiliated with Open Doors or the Global Universities Association. <span class="ar" style="display:block">اختبار تحضيري غير رسمي، وما إلو علاقة بـ Open Doors.</span></p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Exam format (same as the official Open Doors demo)</h3>
+      <div class="tw"><table>
+        <tr><th>Part</th><th>Tasks</th><th>Points</th><th>Answer type</th></tr>
+        <tr><td>Basic level</td><td>1–25</td><td>1 each (25)</td><td>One correct answer</td></tr>
+        <tr><td>Intermediate level</td><td>26–40</td><td>3 each (45)</td><td>Number, word, ordering or "select all that apply"</td></tr>
+        <tr><td>Advanced level</td><td>41–43</td><td>10 each (30)</td><td>Detailed solution, graded by criteria</td></tr>
+        <tr><td>Oral-response</td><td>choose ONE of 44–46</td><td>5</td><td>Spoken answer (write your notes here)</td></tr>
+      </table></div>
+      <p><b>Time:</b> 3 hours. The timer keeps running if you reload the page. When time is up the exam is submitted automatically.</p>
+      <p><b>Grading:</b> basic and intermediate tasks are graded automatically. For advanced and oral tasks you will see the model answer and the official-style criteria, and you score yourself honestly.</p>
+      <p class="muted" dir="rtl" style="text-align:right;font-family:'IBM Plex Sans Arabic',Tahoma,sans-serif">الاختبار بالإنجليزي متل الاختبار الحقيقي. بعد التسليم بيطلعلك التصحيح، ومع كل سؤال شرح بالعربي ليش هاد الجواب هو الصح.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn primary" id="startBtn" type="button">Start exam (3:00:00)</button>
+        <button class="btn hide" id="reviewBtn" type="button">Show my last result</button>
+        <button class="btn hide" id="resetBtn" type="button">Start over</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXAM -->
+  <div id="exam" class="hide">
+    <div class="nav" id="nav"></div>
+    <div id="summary"></div>
+    <div id="tasks"></div>
+    <div class="card" id="endCard">
+      <button class="btn primary" id="submitBtn2" type="button">Submit exam</button>
+      <span class="muted" style="margin-left:10px">You can review your answers before submitting.</span>
+    </div>
+  </div>
+</div>
+
+<footer class="brandfoot">
+  <span>Prepared by <b>Eng. Ahmad Mohammad Zeina</b> · Professional AI courses</span>
+  <span>WhatsApp: <a href="https://wa.me/963988466650" target="_blank" rel="noopener" style="color:var(--accent)">+963 988 466 650</a></span>
+  <span>GitHub: <a href="https://github.com/Giantpixeel" target="_blank" rel="noopener" style="color:var(--accent)">github.com/Giantpixeel</a></span>
+  <span>Unofficial practice test, not affiliated with Open Doors.</span>
+  <a href="https://wa.me/963988466650?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D9%84%D9%82%D9%8A%D8%AA%20%D8%AE%D8%B7%D8%A3%20%D8%A8%D8%A7%D9%84%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1%20%D8%A7%D9%84%D8%AA%D8%AC%D8%B1%D9%8A%D8%A8%D9%8A%3A%20" target="_blank" rel="noopener" style="color:var(--accent)">Report a mistake · بلّغ عن خطأ</a>
+  <!--HOME--><a href="index.html" style="color:var(--accent);font-weight:600">← All mock exams · كل الاختبارات</a><!--/HOME-->
+</footer>
+<div class="modal" id="modal" hidden><div class="box" role="dialog" aria-modal="true" aria-labelledby="mMsg">
+  <p id="mMsg" style="margin:0;font-weight:600"></p>
+  <div class="row"><button class="btn" id="mNo" type="button">Cancel</button><button class="btn primary" id="mYes" type="button">OK</button></div>
+</div></div>
+<script>
+var EXAM = {
+id: 'mock3',
+title: 'Open Doors Mock Exam 3 — Computer and Data Science (Master)',
+short: 'Open Doors Mock Exam 3',
+subtitle: 'Second-round simulation · 46 tasks · 3 hours · English',
+tasks: [
+/* ================= BASIC ================= */
+{n:1,lvl:'basic',pts:1,field:'Applied mathematics',type:'mc',
+ q:`Find lim<sub>x→0</sub> (eˣ − 1) / x.`,
+ opts:['0','e','∞','1'],ans:3,
+ why:`نهاية مشهورة: <span class="ltr">lim (eˣ − 1)/x = 1</span>، لأنها تعريف مشتقة eˣ عند الصفر (<span class="ltr">e⁰ = 1</span>)، أو بـ L'Hôpital: <span class="ltr">eˣ/1 → 1</span>. والتعويض المباشر بيعطي <span class="ltr">0/0</span>، وهي صيغة غير معيّنة، مش صفر ولا ∞.`},
+{n:2,lvl:'basic',pts:1,field:'Applied mathematics',type:'mc',
+ q:`The series Σ<sub>n=0</sub><sup>∞</sup> xⁿ / n! is:`,
+ opts:['a power series','an alternating series','a Fourier series','the harmonic series'],ans:0,
+ why:`فيها قوى للمتغير x مضروبة بمعاملات <span class="ltr">1/n!</span>، يعني متسلسلة قوى، وهي سلسلة Maclaurin لـ eˣ. وما هي متناوبة لأنه ما في <span class="ltr">(−1)ⁿ</span>، ولا Fourier لأنه ما في sin و cos، ولا التوافقية <span class="ltr">Σ 1/n</span>.`},
+{n:3,lvl:'basic',pts:1,field:'Applied mathematics',type:'mc',
+ q:`What type of integral is ∫<sub>0</sub><sup>1</sup> x² dx = 1/3 ?`,
+ opts:['indefinite integral','definite integral','improper integral','line integral'],ans:1,
+ why:`إلو <b>حدود منتهية</b> (0 و 1)، والدالة محدودة على المجال، وناتجه <b>رقم</b> (1/3)، فهو تكامل محدد. ولا هو improper لأنه ما في حد لا نهائي ولا نقطة شاذة.`},
+{n:4,lvl:'basic',pts:1,field:'Computer science, information systems',type:'mc',
+ q:`What is the 8-bit two's-complement representation of −1?`,
+ opts:['10000001','11111110','01111111','11111111'],ans:3,
+ why:`<span class="ltr">2⁸ − 1 = 255 = 11111111</span>. أو: <span class="ltr">+1 = 00000001</span>، منعكس فبيصير <span class="ltr">11111110</span>، ومنزيد 1 فبيصير <span class="ltr">11111111</span>. أما <span class="ltr">10000001</span> فهو تمثيل sign-magnitude لـ −1، و <span class="ltr">11111110</span> هو ones' complement، و <span class="ltr">01111111</span> هو +127.`},
+{n:5,lvl:'basic',pts:1,field:'Computer science, information systems',type:'mc',
+ q:`Which CPU component performs arithmetic and logical operations?`,
+ opts:['Control unit','Arithmetic logic unit (ALU)','Cache memory','System bus'],ans:1,
+ why:`الـ <b>ALU</b> بيعمل الجمع والطرح والعمليات المنطقية (AND و OR و XOR) والمقارنات. أما وحدة التحكم فبتجيب الأوامر وبتفكها وبتنسّق، والكاش للتخزين السريع، والـ bus لنقل البيانات.`},
+{n:6,lvl:'basic',pts:1,field:'Computer science, information systems',type:'mc',
+ q:`Phishing is an attack that primarily targets:`,
+ opts:['hardware components','compilers','users, through social engineering','the power supply'],ans:2,
+ why:`الـ Phishing رسائل مزيّفة (إيميل أو SMS أو مواقع) بتخدع <b>المستخدم</b> ليعطي كلمة السر أو بيانات البطاقة أو يفتح مرفق، يعني هندسة اجتماعية. والحماية بالتوعية، و 2FA، وفلاتر البريد.`},
+{n:7,lvl:'basic',pts:1,field:'Computer science, information systems',type:'mc',
+ q:`An incremental backup copies:`,
+ opts:['all files every time','only deleted files','files changed since the last full backup','files changed since the last backup of any type'],ans:3,
+ why:`الـ <b>Incremental</b> بيقارن مع <b>آخر نسخة من أي نوع</b>، فهو الأسرع والأصغر، بس الاسترجاع بيحتاج النسخة الكاملة مع كل التزايديات بالترتيب. أما الخيار "since the last full backup" فهو الـ <b>differential</b>.`},
+{n:8,lvl:'basic',pts:1,field:'Computer science, information systems',type:'mc',
+ q:`Which RAID level provides striping without any redundancy?`,
+ opts:['RAID 0','RAID 1','RAID 5','RAID 6'],ans:0,
+ why:`RAID 0 بيقسم البيانات على الأقراص للسرعة، و<b>ما فيه أي حماية</b>: إذا تعطّل قرص واحد بتضيع كل البيانات. أما RAID 1 فـ mirror، و RAID 5 فيه parity، و RAID 6 فيه parity مضاعفة.`},
+{n:9,lvl:'basic',pts:1,field:'Computer science, artificial intelligence',type:'mc',
+ q:`According to the bias–variance trade-off, increasing model complexity usually:`,
+ opts:['increases bias and decreases variance','decreases bias and increases variance','decreases both bias and variance','increases both bias and variance'],ans:1,
+ why:`النموذج الأعقد بيقدر يلحق البيانات أكتر، فالـ <b>bias بينزل</b>، بس بيصير حساس للضجيج، فالـ <b>variance بيطلع</b>، وهيك بيقرب من الـ overfitting. والهدف النقطة اللي فيها الخطأ الكلي (bias² + variance + noise) بأقل قيمة.`},
+{n:10,lvl:'basic',pts:1,field:'Computer science, artificial intelligence',type:'mc',
+ q:`In fraud detection, missing a fraudulent transaction is very costly. Which metric should be monitored most closely?`,
+ opts:['Precision','R²','Accuracy','Recall'],ans:3,
+ why:`الاحتيال اللي فاتنا هو <b>FN</b>، و <span class="ltr">Recall = TP/(TP + FN)</span>، فالـ recall هو المقياس اللي بيتأثر مباشرة. والـ accuracy مضلّل لأنه الاحتيال نادر، والـ precision بيهتم بالـ FP، و R² مقياس انحدار.`},
+{n:11,lvl:'basic',pts:1,field:'Computer science, artificial intelligence',type:'mc',
+ q:`Which algorithm builds an ensemble of decision trees, each trained on a bootstrap sample with random feature subsets?`,
+ opts:['Random Forest','k-Means','Naive Bayes','Linear regression'],ans:0,
+ why:`الـ <b>Random Forest</b> بيستخدم bagging (عينات bootstrap) مع اختيار عشوائي للميزات بكل شجرة، والتنبؤ بالتصويت أو بالمتوسط، وهاد بيقلل الـ variance. أما k-Means فتجميع، و Naive Bayes احتمالي، والانحدار الخطي نموذج واحد.`},
+{n:12,lvl:'basic',pts:1,field:'Computer science, artificial intelligence',type:'mc',
+ q:`In a Mamdani fuzzy inference system, the AND operator in rule premises is usually implemented as:`,
+ opts:['maximum','minimum','arithmetic mean','sum'],ans:1,
+ why:`الـ AND هو <b>min</b> (t-norm)، لأنه القاعدة صحيحة بقد أضعف شروطها. والـ OR وتجميع القواعد هو <b>max</b>. والمتوسط والجمع مش المعتمدين بـ Mamdani.`},
+{n:13,lvl:'basic',pts:1,field:'Computer science, interdisciplinary applications',type:'mc',
+ q:`Which SQL command quickly removes all rows from a table, is classified as DDL, and cannot use a WHERE clause?`,
+ opts:['DELETE','DROP INDEX','TRUNCATE','ROLLBACK'],ans:2,
+ why:`<code>TRUNCATE</code> بيفرّغ الجدول كله بسرعة (بدون تسجيل كل سطر)، وبيعتبر DDL. أما <code>DELETE</code> فهو DML، وبيقبل WHERE، وبيحذف سطر سطر. و DROP INDEX بيحذف فهرس، و ROLLBACK أمر TCL.`},
+{n:14,lvl:'basic',pts:1,field:'Computer science, interdisciplinary applications',type:'mc',
+ q:`A foreign key is a column (or set of columns) that:`,
+ opts:['uniquely identifies each row of its own table and cannot be NULL','references the primary key of another (or the same) table','must always be an integer','can never be indexed'],ans:1,
+ why:`الـ <b>Foreign key</b> بيربط جدولين، وقيمه لازم تكون موجودة بالمفتاح الأساسي للجدول المرجعي (referential integrity). أما الخيار الأول فهو تعريف الـ <b>primary key</b>. والنوع مش لازم يكون رقم، ومنقدر نفهرسه (وغالباً بنعمل هيك).`},
+{n:15,lvl:'basic',pts:1,field:'Computer science, interdisciplinary applications',type:'mc',
+ q:`Which GIS interpolation method estimates values at unsampled locations using a variogram model of spatial autocorrelation?`,
+ opts:['Inverse distance weighting (IDW)','Nearest neighbour','Kriging','Linear trend surface'],ans:2,
+ why:`الـ <b>Kriging</b> طريقة جيوإحصائية مبنية على الـ variogram، وبتعطي تقدير مع خطأ التقدير. أما IDW و nearest neighbour و trend فطرق حتمية (deterministic)، ما فيها نموذج إحصائي.`},
+{n:16,lvl:'basic',pts:1,field:'Computer science, software engineering',type:'mc',
+ q:`What does "refactoring" mean in software engineering?`,
+ opts:['Adding new features to the product','Rewriting the program in another language','Fixing compilation errors','Restructuring existing code without changing its external behaviour'],ans:3,
+ why:`الـ Refactoring هو تحسين <b>البنية الداخلية</b> للكود (قراءة أوضح، وتكرار أقل، وتصميم أفضل) <b>بدون ما يتغيّر السلوك الخارجي</b>، ودايماً مع اختبارات بتتأكد من هالشي. أما إضافة الميزات وإعادة الكتابة بلغة تانية وتصحيح الأخطاء فكلها مهام تانية.`},
+{n:17,lvl:'basic',pts:1,field:'Computer science, software engineering',type:'mc',
+ q:`Which testing level verifies the interaction between combined modules?`,
+ opts:['Unit testing','Integration testing','Acceptance testing','Usability testing'],ans:1,
+ why:`الـ <b>Integration testing</b> بيختبر الواجهات والتفاعل بين الوحدات بعد ما نجمعها. أما الـ unit فبيختبر وحدة وحدة لحالها، والـ acceptance بيتحقق من متطلبات الزبون، والـ usability بيختبر سهولة الاستخدام.`},
+{n:18,lvl:'basic',pts:1,field:'Computer science, software engineering',type:'mc',
+ q:`In the classical Waterfall model, which phase directly follows the design phase?`,
+ opts:['Requirements analysis','Implementation (coding)','Maintenance','Feasibility study'],ans:1,
+ why:`ترتيب Waterfall: المتطلبات، بعدين التصميم، بعدين <b>التنفيذ</b>، بعدين الاختبار، بعدين النشر، بعدين الصيانة. والمتطلبات قبل التصميم، والصيانة بالآخر.`},
+{n:19,lvl:'basic',pts:1,field:'Computer science, software engineering',type:'mc',
+ q:`Which SOLID principle states that a class should have only one reason to change?`,
+ opts:['Open/closed principle','Liskov substitution principle','Single responsibility principle','Dependency inversion principle'],ans:2,
+ why:`الـ <b>S</b> بـ SOLID هو Single Responsibility: الصف إلو مسؤولية وحدة. أما O فمفتوح للتوسعة ومغلق للتعديل. و L الصف المشتق لازم يقدر يحل محل الأساسي. و D الاعتماد على التجريدات مش على التفاصيل.`},
+{n:20,lvl:'basic',pts:1,field:'Computer science, hardware & architecture',type:'mc',
+ q:`A 4-way set-associative cache holds 64 KB of data with 64-byte lines. How many bits are used for the set index?`,
+ opts:['6','10','8','12'],ans:2,
+ why:`عدد الأسطر <span class="ltr">64 KB / 64 B = 1024</span>، وعدد الـ sets <span class="ltr">1024 / 4 = 256</span>، فالـ index = <span class="ltr">log₂256 = 8</span>. الفخ 10 بيطلع إذا اعتبرته direct-mapped (1024 سطر)، و 6 هو الـ offset (<span class="ltr">log₂64</span>).`},
+{n:21,lvl:'basic',pts:1,field:'Computer science, hardware & architecture',type:'mc',
+ q:`Which cache write policy writes modified data to main memory only when the cache line is evicted?`,
+ opts:['Write-back','Write-through','Write-around','Read-allocate'],ans:0,
+ why:`الـ <b>Write-back</b> بيعلّم السطر "dirty"، وبيكتبه على الـ RAM بس لما يطلع من الكاش، فبيوفّر كتابات. أما الـ write-through فبيكتب على الكاش والـ RAM سوا بكل كتابة، والـ write-around بيكتب على الـ RAM بس ومن دون ما يمرق على الكاش.`},
+{n:22,lvl:'basic',pts:1,field:'Computer science, hardware & architecture',type:'mc',
+ q:`Gigabit Ethernet (1 Gbit/s) works at 75 % efficiency. How long does it take to transfer 3000 MB?`,
+ opts:['24 s','4 s','32 s','40 s'],ans:2,
+ why:`<span class="ltr">1000 Mbit/s × 0.75 = 750 Mbit/s = 93.75 MB/s</span>، و <span class="ltr">3000 / 93.75 = 32 s</span>. الفخاخ: 24 s بيطلع إذا نسيت الـ 75% (<span class="ltr">3000·8/1000</span>)، و 4 s إذا نسيت تحوّل لبتات (<span class="ltr">3000/750</span>).`},
+{n:23,lvl:'basic',pts:1,field:'Computer science, hardware & architecture',type:'mc',
+ q:`Which state does a process enter while it waits for an I/O operation to complete?`,
+ opts:['Ready','Running','Terminated','Blocked (waiting)'],ans:3,
+ why:`لما العملية تطلب I/O بتنتقل لحالة <b>Blocked أو Waiting</b>، ولما يخلص الـ I/O بترجع لـ <b>Ready</b> وبتستنى المعالج. والـ Ready يعني جاهزة بس ما معها CPU.`},
+{n:24,lvl:'basic',pts:1,field:'Computer science, hardware & architecture',type:'mc',
+ q:`Which scheduling algorithm minimizes the average waiting time when the CPU burst times are known in advance?`,
+ opts:['First-Come, First-Served','Shortest Job First','Round Robin','Random scheduling'],ans:1,
+ why:`الـ <b>SJF</b> مثبت إنه الأمثل لمتوسط الانتظار، لأنه بيشغّل القصير أول فبيقلّ انتظار الكل. وعيبه إنه بيحتاج يعرف الأزمنة مسبقاً، وممكن يعمل starvation للمهام الطويلة.`},
+{n:25,lvl:'basic',pts:1,field:'Computer science, hardware & architecture',type:'mc',
+ q:`Thrashing occurs when:`,
+ opts:['the CPU overheats','the system spends most of its time swapping pages in and out instead of executing processes','the cache uses a write-back policy','too many threads are idle'],ans:1,
+ why:`الـ <b>Thrashing</b>: الذاكرة ما بتكفي مجموعات العمل للعمليات، فالـ page faults بتصير متواصلة، والنظام بيقضي أغلب وقته بنقل الصفحات، والأداء بينهار. والحل تقليل عدد العمليات، أو زيادة الـ RAM، أو نموذج working set.`},
+/* ================= INTERMEDIATE ================= */
+{n:26,lvl:'inter',pts:3,field:'Applied mathematics',type:'num',ans:4,
+ q:`Find lim<sub>x→2</sub> (x² − 4) / (x − 2).`,
+ why:`التعويض المباشر بيعطي <span class="ltr">0/0</span>. منحلّل: <span class="ltr">(x − 2)(x + 2)/(x − 2) = x + 2</span>، فالنهاية <span class="ltr">2 + 2 = 4</span>.`},
+{n:27,lvl:'inter',pts:3,field:'Applied mathematics',type:'text',ans:['convex','concave up','convex (concave up)','convex downward'],
+ q:`Suppose f is twice differentiable on (a, b) and f″(x) &gt; 0 for every x in (a, b). What can be said about the shape of the graph of f on (a, b)? (one word)`,
+ why:`<span class="ltr">f″ &gt; 0</span> يعني المشتقة الأولى متزايدة، والمنحنى بيلتف لفوق (∪)، وهاد اسمه <b>convex</b> (concave up). وعكسه <span class="ltr">f″ &lt; 0</span> يعني concave. والمشتقة الأولى (مش التانية) هي اللي بتحدد إذا الدالة متزايدة.`},
+{n:28,lvl:'inter',pts:3,field:'Applied mathematics',type:'order',ans:'2413',
+ q:`Arrange the integrals in ascending order of their values (write the numbers without spaces, brackets or commas):<br>1) ∫<sub>0</sub><sup>π/2</sup> cos x dx &nbsp; 2) ∫<sub>−2</sub><sup>2</sup> x dx &nbsp; 3) ∫<sub>0</sub><sup>2</sup> x dx &nbsp; 4) ∫<sub>0</sub><sup>1</sup> x² dx`,
+ why:`(1) <span class="ltr">[sin x]₀^{π/2} = 1</span>. (2) x فردية على مجال متناظر، فبيطلع 0. (3) <span class="ltr">[x²/2]₀² = 2</span>. (4) <span class="ltr">1/3</span>. الترتيب <span class="ltr">0 &lt; 1/3 &lt; 1 &lt; 2</span>، يعني <b>2413</b>.`},
+{n:29,lvl:'inter',pts:3,field:'Computer science, information systems',type:'num',ans:768,
+ q:`An uncompressed grayscale image has 1024 × 768 pixels with 8 bits per pixel. What is its size in KiB (1 KiB = 1024 bytes)? Enter an integer.`,
+ why:`<span class="ltr">1024 × 768 × 1 B = 786,432 B</span>، و <span class="ltr">÷ 1024 = 768 KiB</span>. ولو كانت ملونة 24 بت بيصير الحجم 3 أضعاف.`},
+{n:30,lvl:'inter',pts:3,field:'Computer science, information systems',type:'text',ans:['virtual'],
+ q:`Which C++ keyword must be used in a base class so that a member function call through a base-class pointer is dispatched to the derived-class implementation at run time? (one word)`,
+ why:`<code>virtual</code> بيفعّل الـ <b>dynamic dispatch</b> عبر الـ vtable، وهاد هو تعدد الأشكال وقت التشغيل. وبالصف المشتق منكتب <code>override</code> للتأكيد. وبدون virtual بتتنفّذ نسخة الصف الأساسي.`},
+{n:31,lvl:'inter',pts:3,field:'Computer science, artificial intelligence',type:'num',ans:45,
+ q:`For a feature, Q1 = 20 and Q3 = 30. Using the IQR rule with factor 1.5, what is the upper bound above which values are considered outliers?`,
+ why:`<span class="ltr">IQR = 30 − 20 = 10</span>، والحد الأعلى <span class="ltr">Q3 + 1.5·IQR = 30 + 15 = 45</span>. (والحد الأدنى <span class="ltr">20 − 15 = 5</span>.)`},
+{n:32,lvl:'inter',pts:3,field:'Computer science, artificial intelligence',type:'multi',ans:[0,2,3,5],
+ q:`Which of the following are hyperparameters (chosen before training) rather than parameters learned during training?`,
+ opts:['Learning rate','Weights of a neural network','Number of hidden layers','k in k-nearest neighbours','Bias terms of neurons','Regularization strength (λ)'],
+ why:`الـ hyperparameters منحددها <b>قبل</b> التدريب، ومنضبطها على مجموعة validation: الـ learning rate، وعدد الطبقات، و k، و λ. أما الأوزان والانحيازات فهي <b>معاملات بتتعلّم</b> خلال التدريب بالـ gradient descent.`},
+{n:33,lvl:'inter',pts:3,field:'Computer science, software engineering',type:'multi',ans:[0,1,3],
+ q:`Which of the following are Scrum artifacts?`,
+ opts:['Product backlog','Sprint backlog','Gantt chart','Increment','Software Requirements Specification (SRS)'],
+ why:`أدوات Scrum (artifacts) التلاتة: Product backlog، و Sprint backlog، و Increment. أما مخطط Gantt والـ SRS فهني من الإدارة التقليدية (Waterfall).`},
+{n:34,lvl:'inter',pts:3,field:'Computer science, software engineering',type:'text',ans:['mediator topology','mediator'],
+ q:`In event-driven architecture, which topology uses a central component that orchestrates the steps of a complex multi-step event process? (write down 2 words)`,
+ why:`الـ <b>Mediator topology</b>: فيها event mediator مركزي بينسّق الخطوات بالترتيب، وبيتعامل مع الأخطاء. وعكسها الـ <b>broker topology</b> (من الـ Demo الرسمي): ما في مركز، وسلسلة أحداث موزّعة.`},
+{n:35,lvl:'inter',pts:3,field:'Computer science, hardware & architecture',type:'num',ans:8,
+ q:`Five disks of 2 TB each are combined into a RAID 5 array. What is the usable capacity? Enter only the integer number of terabytes.`,
+ why:`<span class="ltr">(n − 1) × C = (5 − 1) × 2 = 8 TB</span>، لأنه مساحة قرص وحدة بتروح للـ parity.`},
+{n:36,lvl:'inter',pts:3,field:'Computer science, hardware & architecture',type:'num',ans:3,
+ q:`A direct-mapped cache stores 8 KB of data in lines of 16 bytes. Addresses are 16 bits wide (byte-addressable). How many bits form the tag?`,
+ why:`عدد الأسطر <span class="ltr">8192 / 16 = 512</span>، فالـ index = 9، والـ offset = <span class="ltr">log₂16 = 4</span>، والـ tag = <span class="ltr">16 − 9 − 4 = 3</span>.`},
+{n:37,lvl:'inter',pts:3,field:'Computer science, hardware & architecture',type:'num',ans:8192,
+ q:`A process has a virtual address space of 2²⁴ bytes and the page size is 2 KB. How many entries does its single-level page table contain? Enter an integer.`,
+ why:`<span class="ltr">2²⁴ / 2¹¹ = 2¹³ = 8192</span> صفحة، يعني 8192 مدخل.`},
+{n:38,lvl:'inter',pts:3,field:'Computer science, hardware & architecture',type:'multi',ans:[0,1,2],
+ q:`Which statements about threads compared with processes are true?`,
+ opts:['Threads of the same process share its address space','Creating a thread is usually cheaper than creating a process','Each thread has its own stack and register set','Threads can never run in parallel on a multi-core CPU','Each thread has its own private copy of the global variables'],
+ why:`الخيوط بتشارك ذاكرة العملية والملفات (a)، وإنشاؤها أخف (b)، وكل خيط إلو stack وسجلات وPC خاصين (c). أما d فغلط لأنه على المعالج متعدد الأنوية بتشتغل بالتوازي. و e غلط لأنه المتغيرات العامة <b>مشتركة</b>، ولهيك منحتاج mutex.`},
+{n:39,lvl:'inter',pts:3,field:'Computer science, hardware & architecture',type:'multi',ans:[0,1,3,4],
+ q:`Which statements correspond to the principles of the von Neumann architecture?`,
+ opts:['The program is stored in memory (stored-program concept)','Instructions and data share the same memory','Instructions and data are kept in physically separate memories','Instructions are executed sequentially using a program counter','Memory consists of addressable (numbered) cells'],
+ why:`مبادئ von Neumann: البرنامج مخزّن بالذاكرة، و<b>ذاكرة وحدة</b> للأوامر والبيانات، والتنفيذ متسلسل عبر الـ PC، والخلايا مرقّمة. أما الخيار c فهو معمارية <b>Harvard</b>.`},
+{n:40,lvl:'inter',pts:3,field:'Computer science, hardware & architecture',type:'multi',ans:[0,1,3],
+ q:`Which statements about virtualization are true?`,
+ opts:['A Type 1 hypervisor runs directly on the hardware (bare metal)','A Type 2 hypervisor runs on top of a host operating system','Containers require a separate guest kernel for each container','A virtual machine can run a different operating system from the host','Virtual machines share the host OS kernel'],
+ why:`الـ hypervisor من النوع الأول (متل ESXi و Hyper-V) بيشتغل على العتاد مباشرة (a)، ومن النوع التاني (متل VirtualBox) بيشتغل فوق نظام تشغيل (b)، والـ VM ممكن يكون نظامها مختلف عن المضيف (d). أما c و e فقلبوا الحقيقة: الـ <b>containers</b> هي اللي بتشارك نواة المضيف، والـ VMs كل وحدة إلها نواتها.`},
+/* ================= ADVANCED ================= */
+{n:41,lvl:'adv',pts:10,field:'Computer science, information systems',type:'adv',
+ q:`<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start">
+<svg viewBox="0 0 330 460" width="230" role="img" aria-label="Flowchart" style="flex:0 0 auto;max-width:100%">
+<defs><marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+<g fill="none" stroke="currentColor" stroke-width="1.4">
+<rect x="115" y="10" width="110" height="30" rx="15"/>
+<polygon points="125,60 230,60 215,90 110,90"/>
+<rect x="115" y="110" width="110" height="30"/>
+<polygon points="110,160 230,160 250,185 230,210 110,210 90,185"/>
+<rect x="115" y="235" width="110" height="30"/>
+<polygon points="125,320 230,320 215,350 110,350"/>
+<rect x="115" y="400" width="110" height="30" rx="15"/>
+</g>
+<g fill="currentColor" font-family="Consolas,monospace" font-size="13" text-anchor="middle" stroke="none">
+<text x="170" y="30">Start</text><text x="170" y="80">n</text><text x="170" y="130">f = 1</text><text x="170" y="189">i = 1, n</text>
+<text x="170" y="255">f = f · i</text><text x="170" y="340">n, f</text><text x="170" y="420">End</text>
+</g>
+<g fill="none" stroke="currentColor" stroke-width="1.3" marker-end="url(#a3)">
+<line x1="170" y1="40" x2="170" y2="60"/><line x1="170" y1="90" x2="170" y2="110"/><line x1="170" y1="140" x2="170" y2="160"/>
+<line x1="170" y1="210" x2="170" y2="235"/>
+<polyline points="170,265 170,285 40,285 40,185 90,185"/>
+<polyline points="250,185 295,185 295,300 170,300 170,320"/>
+<line x1="170" y1="350" x2="170" y2="400"/>
+</g></svg>
+<div style="flex:1;min-width:240px">
+<ol><li>What type of algorithm is represented in the figure? What does it compute?</li>
+<li>Formulate the condition of an applied task that the program solves, written according to the algorithm shown in the figure.</li>
+<li>Indicate the most suitable data type in a high-level programming language for n, i and f. Justify the choice by specifying the physical meaning and the permissible range of values. For which values of n does a 32-bit signed int for f overflow, and what type would you choose instead?</li></ol>
+<p class="muted">Note: a complete solution must include your reasoning.</p></div></div>`,
+ rubric:[{c:'Criterion 1: cyclic algorithm with a counter (loop with a parameter), linear-cyclic structure; computes the factorial f = n! (accumulating product)',p:2},
+  {c:'Criterion 2: complete applied formulation (e.g. number of possible orders/permutations of n objects: context, input, output, use)',p:3},
+  {c:'Criterion 3: types with justification: n, i int; f a wide integer type (long long / unsigned 64-bit or arbitrary precision); overflow analysis',p:3},
+  {c:'Criterion 4: ranges: n ≥ 0 (n ≤ 20 for 64-bit), 1 ≤ i ≤ n, f ≥ 1; overflow: 13! > 2³¹ − 1',p:2}],
+ model:`<p><b>1.</b> A <b>cyclic computational algorithm with a counter</b> (loop with a parameter i = 1 … n, number of iterations known in advance), <b>linear-cyclic</b> structure (no branching). It computes the <b>product</b> f = 1·2·…·n = <b>n!</b> (the factorial); f = 1 is the neutral element of multiplication, so for n = 0 the loop does not run and f = 0! = 1.</p>
+<p><b>2.</b> A logistics company wants to know in how many different orders a courier can visit n delivery points. <b>Given:</b> the number of points n. <b>Required:</b> output n and the number of possible routes (permutations) f = n!. The result shows how fast brute-force route enumeration becomes impossible and justifies using heuristic route-optimization software.</p>
+<p><b>3–4.</b></p><div class="tw"><table><tr><th>Var</th><th>Type</th><th>Meaning and range</th><th>Justification</th></tr>
+<tr><td>n</td><td>int</td><td>number of objects, 0 ≤ n ≤ 20 (for a 64-bit result)</td><td>a count is an integer</td></tr>
+<tr><td>i</td><td>int</td><td>loop counter / current factor, 1 ≤ i ≤ n</td><td>integer by definition</td></tr>
+<tr><td>f</td><td>long long (or unsigned 64-bit; BigInteger / Python int for larger n)</td><td>number of permutations, f ≥ 1</td><td>exact integer count, grows very fast</td></tr></table></div>
+<p><b>Overflow:</b> a 32-bit signed int holds at most 2³¹ − 1 = 2,147,483,647. 12! = 479,001,600 fits, but 13! = 6,227,020,800 does not → overflow from <b>n = 13</b>. A 64-bit signed long long holds up to about 9.22·10¹⁸, so 20! = 2.43·10¹⁸ fits and 21! overflows. A double would give approximate values only (it loses exactness above 2⁵³). For arbitrary n use arbitrary-precision integers (Python int, Java BigInteger).</p>`,
+ why:`<b>نقطة القوة بهالمهمة هي تحليل الطفحان:</b> <span class="ltr">13! &gt; 2³¹ − 1</span>، و <span class="ltr">21! &gt; 2⁶³ − 1</span>. والمسدّس بالمخطط يعني حلقة بعدّاد، و <span class="ltr">f = 1</span> لأنه عنصر محايد للضرب. ولو كانت <span class="ltr">f = 0</span> كان الناتج دايماً صفر، وهاد خطأ شائع.`},
+{n:42,lvl:'adv',pts:10,field:'Computer science, information systems',type:'adv',
+ q:`<p>A code fragment is given:</p>
+<pre>int i = 3, j = 3, s = 0, k;
+k = i != j ? i * j : j++ == 3 ? s = i + j, printf("s=%d\\n", s) : --i;
+cout &lt;&lt; "i=" &lt;&lt; i &lt;&lt; endl;
+cout &lt;&lt; "j=" &lt;&lt; j &lt;&lt; endl;
+cout &lt;&lt; "s=" &lt;&lt; s &lt;&lt; endl;
+cout &lt;&lt; "k=" &lt;&lt; k &lt;&lt; endl;</pre>
+<ol><li>What operation and in which programming language does this example represent? Show the grouping of the expression.</li>
+<li>Provide the code for the same operation in Python, preserving all branches, and choose initial values so that the branch <code>--i</code> is executed.</li>
+<li>State the result of executing the original fragment and of your corrected version, with a step-by-step explanation.</li>
+<li>A university admission system processes applications in a loop. Each application is first checked for completeness (all documents uploaded and score not empty). Complete applications are routed by faculty code (1 = Engineering, 2 = Medicine, 3 = Economics). Within a faculty, the status "admitted"/"rejected" is assigned by comparing the score with the faculty threshold. Which branching operators are most appropriate for each step?</li></ol>`,
+ rubric:[{c:'Criterion 1: C++; nested ternary + comma operator + post-increment inside a comparison + pre-decrement; grouping shown, precedence of == over ?: noted',p:2},
+  {c:'Criterion 2: Python code correct: j++ == 3 compares the OLD j, then increments; s uses the NEW j; printf returns length; all branches preserved',p:3},
+  {c:'Criterion 3: original: line "s=7", then i=3, j=4, s=7, k=4; corrected (e.g. i=j=5): i=4, j=6, s=0, k=4 — with steps',p:2},
+  {c:'Criterion 4: if-else for completeness, switch for faculty code, ternary/if-else for status, loop + append; justification and limitations',p:3}],
+ model:`<p><b>1.</b> C++ (cout/endl, typed declarations, printf). Nested ternary with the comma operator, post-increment inside a comparison and pre-decrement. Since <code>!=</code> and <code>==</code> bind tighter than <code>?:</code>, and ?: is right-associative:<br><code>k = (i != j) ? (i * j) : ((j++ == 3) ? (s = i + j, printf("s=%d\\n", s)) : (--i));</code></p>
+<p><b>2.</b> For <code>--i</code>: i == j (outer condition false) and j ≠ 3 before the increment. Example: <b>i = 5, j = 5</b>.</p>
+<pre>import sys
+def printf(fmt, val):
+    s = fmt % val
+    sys.stdout.write(s)
+    return len(s)
+
+i, j, s = 5, 5, 0
+if i != j:
+    k = i * j
+else:
+    test = (j == 3)        # j++ == 3 compares the OLD value of j
+    j += 1                 # ... then increments
+    if test:
+        s = i + j          # uses the NEW j
+        k = printf("s=%d\\n", s)
+    else:
+        i -= 1             # --i
+        k = i
+print(f"i={i}"); print(f"j={j}"); print(f"s={s}"); print(f"k={k}")</pre>
+<p><b>3.</b> Original (3, 3): 3 != 3 false → j++ == 3 compares 3 == 3 (true), j becomes 4 → s = 3 + 4 = 7 → printf prints "s=7" and returns 4 → k = 4. Output: <b>s=7, i=3, j=4, s=7, k=4</b>.<br>Corrected (5, 5): 5 != 5 false → j++ == 3 compares 5 == 3 (false), j becomes 6 → --i → i = 4, k = 4. Output: <b>i=4, j=6, s=0, k=4</b>.</p>
+<p><b>4.</b> Completeness check (compound condition, two outcomes, several actions for incomplete applications) → <b>if–else</b>. Faculty code 1/2/3 (discrete integral values) → <b>switch</b> with break and default for unknown codes. Status by threshold (one variable gets one of two values) → <b>ternary</b> or if–else. Processing all applications and collecting statuses → <b>loop + append</b>.</p>`,
+ why:`<b>الفخ:</b> <code>j++ == 3</code> بيقارن القيمة <b>القديمة</b> (3)، بس <code>s = i + j</code> بيستخدم j <b>الجديدة</b> (4)، فبيطلع s = 7 مش 6. و printf بترجع <span class="ltr">"s=7\\n" = 4</span> أحرف. ولتنفيذ <code>--i</code> لازم <span class="ltr">i == j</span> و <span class="ltr">j ≠ 3</span>.`},
+{n:43,lvl:'adv',pts:10,field:'Computer science, artificial intelligence',type:'adv',
+ q:`<p>A shop studies how monthly advertising spending x (thousand €) affects sales y (thousand units):</p>
+<div class="tw"><table><tr><th>Month</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr><tr><th>x</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr><tr><th>y</th><td>2</td><td>4</td><td>5</td><td>4</td><td>5</td></tr></table></div>
+<ol><li>Write the least-squares formulas for the slope b₁ and the intercept b₀ of the model ŷ = b₀ + b₁x.</li>
+<li>Compute the means x̄ and ȳ.</li>
+<li>Compute b₁ and b₀.</li>
+<li>Predict sales for x = 6.</li>
+<li>Compute the predictions for the five months and the MAE and RMSE of the model.</li>
+<li>Compute R² and interpret it.</li>
+<li>Which type of machine-learning task is this, and is it supervised or unsupervised?</li></ol>
+<p class="muted">Round results to two decimal places where needed. The progress of the solution is assessed.</p>`,
+ rubric:[{c:'Criterion 1: b₁ = Σ(x−x̄)(y−ȳ) / Σ(x−x̄)², b₀ = ȳ − b₁x̄',p:1},
+  {c:'Criterion 2: x̄ = 3, ȳ = 4',p:1},
+  {c:'Criterion 3: Sxy = 6, Sxx = 10 → b₁ = 0.6, b₀ = 2.2',p:2},
+  {c:'Criterion 4: ŷ(6) = 2.2 + 0.6·6 = 5.8',p:1},
+  {c:'Criterion 5: predictions 2.8, 3.4, 4.0, 4.6, 5.2; MAE = 0.64; RMSE = √0.48 ≈ 0.69',p:2},
+  {c:'Criterion 6: R² = 1 − 2.4/6 = 0.6 → the model explains 60 % of the variance of sales',p:2},
+  {c:'Criterion 7: supervised learning, regression',p:1}],
+ model:`<p><b>1.</b> b₁ = Σ(xᵢ − x̄)(yᵢ − ȳ) / Σ(xᵢ − x̄)²; b₀ = ȳ − b₁·x̄.</p>
+<p><b>2.</b> x̄ = (1+2+3+4+5)/5 = <b>3</b>; ȳ = (2+4+5+4+5)/5 = <b>4</b>.</p>
+<p><b>3.</b> x − x̄ = −2, −1, 0, 1, 2; y − ȳ = −2, 0, 1, 0, 1. Sxy = 4 + 0 + 0 + 0 + 2 = <b>6</b>; Sxx = 4 + 1 + 0 + 1 + 4 = <b>10</b>. b₁ = 6/10 = <b>0.6</b>; b₀ = 4 − 0.6·3 = <b>2.2</b>. Model: ŷ = 2.2 + 0.6x.</p>
+<p><b>4.</b> ŷ(6) = 2.2 + 3.6 = <b>5.8</b> thousand units.</p>
+<p><b>5.</b> ŷ = 2.8, 3.4, 4.0, 4.6, 5.2; residuals e = −0.8, 0.6, 1.0, −0.6, −0.2. MAE = (0.8 + 0.6 + 1.0 + 0.6 + 0.2)/5 = <b>0.64</b>. MSE = (0.64 + 0.36 + 1 + 0.36 + 0.04)/5 = 2.4/5 = 0.48; RMSE = √0.48 ≈ <b>0.69</b>.</p>
+<p><b>6.</b> SS_res = 2.4; SS_tot = Σ(y − ȳ)² = 4 + 0 + 1 + 0 + 1 = 6. R² = 1 − 2.4/6 = <b>0.6</b>: the model explains 60 % of the variation in sales; the remaining 40 % is due to other factors or noise. RMSE &gt; MAE shows that some errors (month 3) are larger than average.</p>
+<p><b>7.</b> <b>Supervised learning, regression</b> — the target y is a known continuous value.</p>`,
+ why:`<b>الترتيب المهم:</b> الأول المتوسطات، بعدين الانحرافات، بعدين Sxy و Sxx، بعدين الميل والتقاطع، بعدين التنبؤات والبواقي، بعدين المقاييس. و RMSE دايماً ≥ MAE. و R² قيمته الكبرى 1، وكل ما قرب منها كان النموذج أحسن.`},
+/* ================= ORAL ================= */
+{n:44,lvl:'oral',pts:5,field:'Computer science, information systems',type:'oral',linked:41,
+ q:`Why is int a poor choice for the variable f in the algorithm of task 41? Which data type would you choose and why?`,
+ model:`<p>The factorial grows faster than exponentially, while <code>int</code> is usually a <b>32-bit signed</b> type with maximum 2³¹ − 1 ≈ 2.1·10⁹. Already 13! ≈ 6.2·10⁹ exceeds it, and in C++ signed <b>integer overflow is undefined behaviour</b>: the program may silently print a wrong, even negative, number. I would choose a <b>64-bit integer</b> (<code>long long</code> or <code>unsigned long long</code>), which is exact up to 20!; for larger n an <b>arbitrary-precision integer</b> (Python <code>int</code>, Java <code>BigInteger</code>, GMP in C++). A <code>double</code> covers a larger range (up to about 170!) but only approximately, because it has 53 bits of mantissa, so it is acceptable only when an approximate magnitude is enough. I would also validate the input range of n before the loop.</p>`,
+ why:`المصطلحات: 32-bit signed، و <span class="ltr">2³¹ − 1</span>، و overflow، و undefined behaviour، و long long، و BigInteger، والفرق بين double (تقريبي) و integer (دقيق).`},
+{n:45,lvl:'oral',pts:5,field:'Computer science, information systems',type:'oral',linked:42,
+ q:`What is the difference between j++ == 3 and ++j == 3? Explain with concrete values and say which result the fragment of task 42 would give with ++j.`,
+ model:`<p><code>j++ == 3</code> compares the <b>old</b> value of j with 3 and increments afterwards; <code>++j == 3</code> increments first and compares the <b>new</b> value. With j = 3: <code>j++ == 3</code> is true (3 == 3) and j becomes 4; <code>++j == 3</code> is false (4 == 3) and j becomes 4. In task 42 with i = j = 3, the original code prints "s=7" and gives k = 4. With <code>++j</code> the comparison fails, so <code>--i</code> executes: i = 2, j = 4, s = 0, k = 2. Both forms have the same side effect on j but yield different values, which changes the control flow. That is why such expressions should be written clearly or split into separate statements; in Python there is no ++, so the order must be made explicit.</p>`,
+ why:`أهم شي مثال رقمي كامل، والنتيجة المعدّلة للمهمة 42 (<span class="ltr">i = 2, j = 4, s = 0, k = 2</span>)، وجملة عن الوضوح والقراءة.`},
+{n:46,lvl:'oral',pts:5,field:'Computer science, artificial intelligence',type:'oral',linked:43,
+ q:`Explain the difference between MAE, RMSE and R². When would you prefer each of them?`,
+ model:`<p><b>MAE</b> (mean absolute error) is the average absolute deviation in the units of y; it treats all errors linearly, is easy to explain and is robust to outliers. <b>RMSE</b> is the square root of the mean squared error, also in the units of y, but squaring gives large errors more weight, so it is preferred when big mistakes are especially costly; RMSE ≥ MAE, and a big gap indicates some large errors. <b>R²</b> is unit-free: the share of the variance of y explained by the model (1 is perfect, 0 is no better than predicting the mean; it can be negative on test data). I use MAE or RMSE to report the expected error to the business (in task 43, MAE = 0.64 thousand units) and R² to compare models on the same data; with many predictors, adjusted R² is better because plain R² never decreases when variables are added.</p>`,
+ why:`لازم تذكر الوحدات، والحساسية للقيم الشاذة، والعلاقة <span class="ltr">RMSE ≥ MAE</span>، ومعنى R²، و adjusted R²، وتربطها بأرقام المهمة 43.`}
+]};
+
+</script>
+<script>
+(function(){
+  var E = EXAM, KEY = 'od-mock-' + E.id, DURATION = 3*60*60*1000;
+  var st = {answers:{}, end:null, submitted:false, self:{}, oral:null, oralScore:0};
+  function load(){ try{ var s = JSON.parse(localStorage.getItem(KEY)||'null'); if(s) st = Object.assign(st, s); }catch(e){} }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(st)); }catch(e){} }
+  load();
+  var $ = function(id){ return document.getElementById(id); };
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  var L = 'abcdefghij';
+
+  // theme
+  var root=document.documentElement, TK='od-theme';
+  try{ var t=localStorage.getItem(TK); if(t) root.setAttribute('data-theme',t); }catch(e){}
+  $('themeBtn').onclick=function(){ var cur=root.getAttribute('data-theme'); if(!cur){cur=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';} var nx=cur==='dark'?'light':'dark'; root.setAttribute('data-theme',nx); try{localStorage.setItem(TK,nx);}catch(e){} };
+
+  function ask(msg, yes, cb){ $('mMsg').textContent=msg; $('mYes').textContent=yes; $('modal').hidden=false; $('mNo').focus();
+    $('mYes').onclick=function(){ $('modal').hidden=true; cb(); }; $('mNo').onclick=function(){ $('modal').hidden=true; }; }
+  document.title = E.short || E.title;
+  document.addEventListener('click', function(ev){
+    var b = ev.target.closest ? ev.target.closest('[data-copy]') : null; if(!b) return;
+    var txt = b.getAttribute('data-copy'), old = b.textContent;
+    function done(){ b.textContent='Copied ✓'; setTimeout(function(){ b.textContent=old; },1600); }
+    function fallback(){ var ph = b.parentNode.querySelector('.phone'); if(ph && window.getSelection){ var r=document.createRange(); r.selectNodeContents(ph); var s=window.getSelection(); s.removeAllRanges(); s.addRange(r); } b.textContent='Selected — copy it'; setTimeout(function(){ b.textContent=old; },2000); }
+    try{ if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done, fallback); } else fallback(); }catch(e){ fallback(); }
+  });
+  $('title').textContent = E.title; $('barTitle').textContent = E.title; $('subtitle').textContent = E.subtitle;
+  if(st.end || st.submitted){ $('resetBtn').classList.remove('hide'); }
+  if(st.submitted){ $('reviewBtn').classList.remove('hide'); $('startBtn').textContent='Retake exam (clears answers)'; }
+  else if(st.end){ $('startBtn').textContent='Resume exam'; }
+
+  $('startBtn').onclick=function(){
+    if(st.submitted){ st={answers:{},end:null,submitted:false,self:{},oral:null,oralScore:0}; }
+    if(!st.end) st.end = Date.now() + DURATION;
+    save(); openExam();
+  };
+  $('reviewBtn').onclick=function(){ openExam(); };
+  $('resetBtn').onclick=function(){ ask('Delete all answers and start over?','Delete and restart',function(){ try{localStorage.removeItem(KEY);}catch(e){} location.reload(); }); };
+
+  var LV = {basic:'Basic level · 1 point', inter:'Intermediate level · 3 points', adv:'Advanced level · 10 points', oral:'Oral-response · 5 points'};
+
+  function render(){
+    var h='', sec='';
+    E.tasks.forEach(function(T){
+      var s = T.lvl==='basic'?'Part A — Basic level (tasks 1–25)':T.lvl==='inter'?'Part B — Intermediate level (tasks 26–40)':T.lvl==='adv'?'Part C — Advanced level (tasks 41–43)':'Part D — Oral-response (choose ONE of tasks 44–46)';
+      if(s!==sec){ sec=s; h+='<h2>'+s+'</h2>'; if(T.lvl==='oral') h+='<p class="muted">In the real exam you answer orally in English (about 1–2 minutes). Choose one task and write the key points you would say.</p>'; }
+      h+='<div class="task" id="t'+T.n+'"><div class="th"><span class="n">Task '+T.n+'</span><span class="lv '+T.lvl+'">'+LV[T.lvl]+'</span><span class="fld">Field of science: '+esc(T.field)+'</span><span class="res" id="r'+T.n+'"></span></div><div class="tb">';
+      if(T.linked) h+='<p class="muted" style="margin:0 0 6px">Advanced-level task: '+T.linked+'</p>';
+      h+='<div class="q">'+T.q+'</div>';
+      var a = st.answers[T.n];
+      if(T.type==='mc'){
+        T.opts.forEach(function(o,i){ h+='<label class="opt" id="o'+T.n+'_'+i+'"><input type="radio" name="q'+T.n+'" value="'+i+'"'+(a===i?' checked':'')+'><span><b>'+L[i]+')</b> '+o+'</span></label>'; });
+      } else if(T.type==='multi'){
+        h+='<p class="hint">Select all that apply.</p>';
+        T.opts.forEach(function(o,i){ var c=a&&a.indexOf(i)>=0; h+='<label class="opt" id="o'+T.n+'_'+i+'"><input type="checkbox" name="q'+T.n+'" value="'+i+'"'+(c?' checked':'')+'><span><b>'+L[i]+')</b> '+o+'</span></label>'; });
+      } else if(T.type==='num'||T.type==='text'||T.type==='order'){
+        h+='<label class="hint">Your answer: </label><input class="ans" id="i'+T.n+'" autocomplete="off" spellcheck="false" value="'+(a!=null?esc(a):'')+'">';
+        if(T.hint) h+='<div class="hint">'+T.hint+'</div>';
+      } else if(T.type==='adv'){
+        h+='<label class="hint">Write your full solution (method, formulas, intermediate results, final answers):</label><textarea id="i'+T.n+'" spellcheck="false">'+(a?esc(a):'')+'</textarea>';
+      } else if(T.type==='oral'){
+        h+='<label class="oralpick"><input type="radio" name="oralpick" value="'+T.n+'"'+(st.oral===T.n?' checked':'')+'> I choose this task</label>';
+        h+='<textarea id="i'+T.n+'" style="min-height:110px" placeholder="Key points of your spoken answer...">'+(a?esc(a):'')+'</textarea>';
+      }
+      h+='<div id="rv'+T.n+'"></div></div></div>';
+    });
+    $('tasks').innerHTML = h;
+    var nav=''; E.tasks.forEach(function(T){ nav+='<a href="#t'+T.n+'" id="n'+T.n+'">'+T.n+'</a>'; }); $('nav').innerHTML = nav;
+    // listeners
+    E.tasks.forEach(function(T){
+      if(T.type==='mc') document.querySelectorAll('input[name=q'+T.n+']').forEach(function(el){ el.onchange=function(){ st.answers[T.n]=+el.value; save(); upd(); }; });
+      else if(T.type==='multi') document.querySelectorAll('input[name=q'+T.n+']').forEach(function(el){ el.onchange=function(){ var v=[]; document.querySelectorAll('input[name=q'+T.n+']:checked').forEach(function(c){v.push(+c.value);}); st.answers[T.n]=v; save(); upd(); }; });
+      else { var el=$('i'+T.n); if(el) el.oninput=function(){ st.answers[T.n]=el.value; save(); upd(); }; }
+    });
+    document.querySelectorAll('input[name=oralpick]').forEach(function(el){ el.onchange=function(){ st.oral=+el.value; save(); upd(); }; });
+  }
+  function answered(T){ var a=st.answers[T.n]; if(T.type==='oral') return st.oral===T.n; if(a==null) return false; if(Array.isArray(a)) return a.length>0; return String(a).trim()!==''; }
+  function upd(){
+    var n=0, tot=0; E.tasks.forEach(function(T){ if(T.type==='oral') return; tot++; if(answered(T)) n++; var el=$('n'+T.n); if(el && !st.submitted) el.className=answered(T)?'done':''; });
+    E.tasks.forEach(function(T){ if(T.type==='oral'){ var el=$('n'+T.n); if(el && !st.submitted) el.className=st.oral===T.n?'done':''; } });
+    $('prog').textContent = n+'/'+tot+' answered' + (st.oral?' · oral '+st.oral:'');
+  }
+  // timer
+  var tmr=null;
+  function tick(){
+    if(st.submitted){ $('timer').textContent='Submitted'; return; }
+    var left = st.end - Date.now();
+    if(left<=0){ $('timer').textContent='0:00:00'; clearInterval(tmr); st.timeUp=true; submit(true); return; }
+    var s=Math.floor(left/1000), hh=Math.floor(s/3600), mm=Math.floor(s%3600/60), ss=s%60;
+    $('timer').textContent = hh+':'+String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');
+    $('timer').classList.toggle('low', left < 10*60*1000);
+  }
+  function openExam(){
+    $('start').classList.add('hide'); $('exam').classList.remove('hide'); $('bar').classList.remove('hide');
+    render(); upd();
+    if(st.submitted){ showReview(); } else { tick(); tmr=setInterval(tick,1000); }
+    window.scrollTo(0,0);
+  }
+  function norm(s){ return String(s==null?'':s).trim().toLowerCase().replace(/\s+/g,' ').replace(/[.]+$/,''); }
+  function grade(T){
+    var a=st.answers[T.n];
+    if(T.type==='mc') return a===T.ans;
+    if(T.type==='multi'){ if(!Array.isArray(a)) return false; var x=a.slice().sort().join(','), y=T.ans.slice().sort().join(','); return x===y; }
+    if(T.type==='num'){ if(a==null||String(a).trim()==='') return false; var v=parseFloat(String(a).replace(',','.').replace(/[^0-9eE.+\-]/g,'')); return !isNaN(v) && Math.abs(v-T.ans) <= (T.tol||1e-9); }
+    if(T.type==='text'){ var n=norm(a); return T.ans.some(function(x){ return norm(x)===n; }); }
+    if(T.type==='order'){ return String(a||'').replace(/[^0-9a-z]/gi,'')===T.ans; }
+    return null;
+  }
+  function correctText(T){
+    if(T.type==='mc') return L[T.ans]+') '+T.opts[T.ans];
+    if(T.type==='multi') return T.ans.map(function(i){return L[i];}).join(', ');
+    if(T.type==='num') return String(T.show||T.ans);
+    if(T.type==='text') return T.ans[0];
+    if(T.type==='order') return T.ans;
+    return '';
+  }
+  function yourText(T){
+    var a=st.answers[T.n];
+    if(a==null||a===''||(Array.isArray(a)&&!a.length)) return '<i>no answer</i>';
+    if(T.type==='mc') return L[a]+')';
+    if(T.type==='multi') return a.slice().sort().map(function(i){return L[i];}).join(', ');
+    return esc(a);
+  }
+  function submit(force){
+    function go(){ st.submitted=true; save(); clearInterval(tmr); showReview(); window.scrollTo(0,0); }
+    if(force) go(); else ask('Submit the exam now? You will not be able to change your answers.','Submit exam',go);
+  }
+  $('submitBtn').onclick=function(){ if(!st.submitted) submit(false); else window.scrollTo(0,0); };
+  $('submitBtn2').onclick=function(){ if(!st.submitted) submit(false); };
+
+  function showReview(){
+    $('timer').textContent='Submitted'; $('submitBtn').textContent='Summary ↑'; $('endCard').classList.add('hide');
+    document.querySelectorAll('#tasks input, #tasks textarea').forEach(function(el){ el.disabled=true; });
+    E.tasks.forEach(function(T){
+      var rv=$('rv'+T.n), r=$('r'+T.n), nav=$('n'+T.n), h='';
+      if(T.type==='adv'){
+        r.textContent='Self-assessed'; r.className='res self'; nav.className='self';
+        h+='<div class="model"><h4>Model solution</h4>'+T.model+'</div>';
+        h+='<div class="card rub" style="margin:10px 0 0"><b>Score yourself by the criteria (tick what your solution really contains):</b>';
+        T.rubric.forEach(function(c,i){ var k=T.n+'_'+i, ch=st.self[k]?' checked':''; h+='<label><input type="checkbox" data-k="'+k+'" data-p="'+c.p+'"'+ch+'><span>'+c.c+' — <b>'+c.p+' pt</b></span></label>'; });
+        h+='</div>';
+        if(T.why) h+='<div class="why"><b class="t">ليش هيك الحل؟</b>'+T.why+'</div>';
+      } else if(T.type==='oral'){
+        var chosen = st.oral===T.n;
+        r.textContent = chosen?'Your choice · self-assessed':'Not chosen'; r.className='res self'; nav.className=chosen?'self':'';
+        h+='<div class="model"><h4>Model answer</h4>'+T.model+'</div>';
+        if(chosen){ h+='<div class="card" style="margin:10px 0 0"><b>Score yourself (0–5)</b> — criterion 1: terminology and concepts; criterion 2: breadth (facts, examples, theory ↔ practice). <select id="oralSel" style="font:inherit;margin-left:8px">'; for(var p=0;p<=5;p++) h+='<option'+(st.oralScore===p?' selected':'')+'>'+p+'</option>'; h+='</select></div>'; }
+        if(T.why) h+='<div class="why"><b class="t">شو بيدوّر عليه المصحح؟</b>'+T.why+'</div>';
+      } else {
+        var ok=grade(T);
+        r.textContent = ok?'✓ Correct (+'+T.pts+')':'✗ Incorrect (0/'+T.pts+')'; r.className='res '+(ok?'ok':'bad'); nav.className=ok?'ok':'bad';
+        if(T.type==='mc'||T.type==='multi'){
+          var corr = T.type==='mc'?[T.ans]:T.ans, mine = st.answers[T.n]; mine = mine==null?[]:(Array.isArray(mine)?mine:[mine]);
+          T.opts.forEach(function(o,i){ var el=$('o'+T.n+'_'+i); if(corr.indexOf(i)>=0) el.classList.add('correct'); else if(mine.indexOf(i)>=0) el.classList.add('wrong'); });
+        }
+        h+='<div class="cmp"><span><b>Your answer:</b> '+yourText(T)+'</span><span><b>Correct answer:</b> '+esc(correctText(T))+'</span></div>';
+        h+='<div class="why"><b class="t">ليش هاد الجواب؟</b>'+T.why+'</div>';
+      }
+      rv.innerHTML=h;
+    });
+    document.querySelectorAll('.rub input').forEach(function(el){ el.disabled=false; el.onchange=function(){ st.self[el.dataset.k]=el.checked; save(); score(); }; });
+    var os=$('oralSel'); if(os){ os.disabled=false; os.onchange=function(){ st.oralScore=+os.value; save(); score(); }; }
+    score();
+  }
+  function score(){
+    var basic=0, inter=0, adv=0, byField={}, nb=0, ni=0;
+    E.tasks.forEach(function(T){
+      if(T.type==='adv'){ T.rubric.forEach(function(c,i){ if(st.self[T.n+'_'+i]) adv+=c.p; }); return; }
+      if(T.type==='oral') return;
+      var ok=grade(T), f=T.field; byField[f]=byField[f]||[0,0]; byField[f][1]+=T.pts; if(ok){ byField[f][0]+=T.pts; }
+      if(T.lvl==='basic'){ nb+=T.pts; if(ok) basic+=T.pts; } else { ni+=T.pts; if(ok) inter+=T.pts; }
+    });
+    var oral=st.oral?st.oralScore:0, total=basic+inter+adv+oral, max=nb+ni+30+5, pct=Math.round(total/max*100);
+    var verdict = pct>=75?'Excellent — exam ready.':pct>=60?'Good — review the tasks you missed.':pct>=45?'Borderline — focus on the explanations below.':'Needs work — study the explanations and retake.';
+    var rows=''; for(var f in byField) rows+='<tr><td>'+esc(f)+'</td><td>'+byField[f][0]+' / '+byField[f][1]+'</td></tr>';
+    $('summary').innerHTML='<div class="card summary">'+(st.timeUp?'<div class="notice">Time is up — your exam was submitted automatically.</div>':'')+'<h2 style="margin-top:0;border:0">Result</h2>'+
+      '<div class="grid"><div class="tile"><b>'+basic+' / '+nb+'</b>Basic</div><div class="tile"><b>'+inter+' / '+ni+'</b>Intermediate</div><div class="tile"><b>'+adv+' / 30</b>Advanced (self)</div><div class="tile"><b>'+oral+' / 5</b>Oral (self)</div></div>'+
+      '<p style="margin:14px 0 4px"><span class="big">'+total+' / '+max+'</span> &nbsp; <b>'+pct+'%</b> — '+verdict+'</p>'+
+      '<p class="muted">Auto-graded part (basic + intermediate): '+(basic+inter)+' / '+(nb+ni)+'. Tick the criteria under tasks 41–43 and choose your oral score to complete the total.</p>'+
+      '<div class="tw"><table><tr><th>Field of science (tasks 1–40)</th><th>Score</th></tr>'+rows+'</table></div>'+
+      '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px"><button class="btn danger" type="button" id="retake">Retake this exam</button></div></div>'+
+      '<div class="card brand cta"><h3>Want to master AI? <span class="ar" style="display:block">بدك تحترف الذكاء الاصطناعي؟</span></h3>'+
+      '<p class="ar" style="margin:0">المهام المتقدمة بهالاختبار (Fuzzy logic، والشبكات العصبية، والانحدار، وكشف القيم الشاذة) هي جزء صغير من عالم الذكاء الاصطناعي. مع <b>المهندس أحمد محمد زينة</b> بتتعلّم <b>الذكاء الاصطناعي وتعلّم الآلة بشكل احترافي</b>، من الأساسيات للتطبيق العملي.</p>'+
+      '<div class="contact"><a class="btn wa" href="https://wa.me/963988466650" target="_blank" rel="noopener">Contact on WhatsApp</a><span class="phone">+963 988 466 650</span><button class="btn" type="button" data-copy="+963988466650">Copy number</button><a class="btn" href="https://github.com/Giantpixeel" target="_blank" rel="noopener">GitHub</a></div></div>';
+    $('retake').onclick=function(){ ask('Delete your answers and retake this exam?','Retake',function(){ try{localStorage.removeItem(KEY);}catch(e){} location.reload(); }); };
+  }
+  if(st.end && !st.submitted && st.end < Date.now()){ /* expired while away */ }
+})();
+</script>
+</body>
+</html>
